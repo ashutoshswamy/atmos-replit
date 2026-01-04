@@ -67,7 +67,7 @@ export function FavoritesSidebar({ currentLocation, onSelect, className }: Favor
                 className="group flex items-center justify-between p-3 rounded-xl hover:bg-muted/50 transition-all border border-transparent hover:border-border/50"
               >
                 <button 
-                  onClick={() => onSelect({ ...fav, id: fav.id })}
+                  onClick={() => onSelect({ ...fav, country: fav.country ?? undefined })}
                   className="flex items-center gap-3 flex-1 text-left"
                 >
                   <div className="p-2 rounded-full bg-primary/10 text-primary">
@@ -98,7 +98,7 @@ export function FavoritesSidebar({ currentLocation, onSelect, className }: Favor
       </ScrollArea>
 
       {currentLocation && (
-        <div className="p-4 border-t border-border/50 bg-white/30 backdrop-blur-sm rounded-b-2xl">
+        <div className="p-4 border-t border-border/50 bg-slate-900/40 backdrop-blur-sm rounded-b-2xl">
           <Button 
             className="w-full gap-2 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300" 
             variant={isCurrentFavorite ? "secondary" : "default"}

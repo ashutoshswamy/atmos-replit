@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { Search, MapPin, Loader2 } from "lucide-react";
 import { useCitySearch, type GeoLocation } from "@/hooks/use-weather";
 import { Input } from "@/components/ui/input";
-import { useDebounce } from "@/hooks/use-debounce"; // We'll assume this or create custom
 import { cn } from "@/lib/utils";
 
 interface CitySearchProps {
@@ -63,15 +62,15 @@ export function CitySearch({ onSelect }: CitySearchProps) {
       </div>
 
       {isOpen && results && results.length > 0 && (
-        <div className="absolute top-full mt-2 left-0 w-full bg-white/90 backdrop-blur-xl rounded-xl border border-white/20 shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+        <div className="absolute top-full mt-2 left-0 w-full bg-slate-900/90 backdrop-blur-xl rounded-xl border border-white/10 shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
           <ul className="py-2">
             {results.map((city) => (
               <li key={city.id}>
                 <button
                   onClick={() => handleSelect(city)}
-                  className="w-full text-left px-4 py-3 hover:bg-primary/5 transition-colors flex items-center gap-3 group"
+                  className="w-full text-left px-4 py-3 hover:bg-white/10 transition-colors flex items-center gap-3 group"
                 >
-                  <div className="p-2 rounded-full bg-muted group-hover:bg-white transition-colors">
+                  <div className="p-2 rounded-full bg-white/5 group-hover:bg-white/10 transition-colors">
                     <MapPin className="w-4 h-4 text-muted-foreground group-hover:text-primary" />
                   </div>
                   <div>
