@@ -5,7 +5,7 @@ import { CurrentWeather } from "@/components/CurrentWeather";
 import { HourlyForecast } from "@/components/HourlyForecast";
 import { DailyForecast } from "@/components/DailyForecast";
 import { FavoritesSidebar } from "@/components/FavoritesSidebar";
-import { Loader2, Menu } from "lucide-react";
+import { Loader2, Menu, Github, Linkedin } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 
@@ -23,8 +23,8 @@ export default function Dashboard() {
   const { data: weather, isLoading, error } = useWeather(location.latitude, location.longitude);
 
   return (
-    <div className="min-h-screen pb-12 pt-6 px-4 md:px-8">
-      <header className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 mb-8 md:mb-12 relative z-20">
+    <div className="min-h-screen pb-12 pt-6 px-4 md:px-8 flex flex-col">
+      <header className="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-6 mb-8 md:mb-12 relative z-20">
         <div className="w-full md:w-auto flex items-center justify-between">
           <h1 className="text-2xl font-bold font-display tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-400">
             Atmos
@@ -56,7 +56,7 @@ export default function Dashboard() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
+      <main className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8 flex-grow">
         {/* Main Content Area */}
         <div className="space-y-8 min-w-0">
           {isLoading ? (
@@ -107,6 +107,33 @@ export default function Dashboard() {
           {weather && <DailyForecast weather={weather} />}
         </div>
       </main>
+
+      <footer className="max-w-7xl mx-auto w-full mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+        <p>© 2026 Atmos Weather. All rights reserved.</p>
+        <div className="flex items-center gap-6">
+          <span className="font-medium text-foreground/80">Developed by Ashutosh Swamy</span>
+          <div className="flex items-center gap-3">
+            <a 
+              href="https://github.com/ashutoshswamy" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-primary transition-colors p-1"
+              aria-label="GitHub Profile"
+            >
+              <Github className="w-5 h-5" />
+            </a>
+            <a 
+              href="https://linkedin.com/in/ashutoshswamy" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-primary transition-colors p-1"
+              aria-label="LinkedIn Profile"
+            >
+              <Linkedin className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
