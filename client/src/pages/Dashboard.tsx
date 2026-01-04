@@ -4,9 +4,7 @@ import { CitySearch } from "@/components/CitySearch";
 import { CurrentWeather } from "@/components/CurrentWeather";
 import { HourlyForecast } from "@/components/HourlyForecast";
 import { DailyForecast } from "@/components/DailyForecast";
-import { FavoritesSidebar } from "@/components/FavoritesSidebar";
-import { Loader2, Menu, Github, Linkedin } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Loader2, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // Default to San Francisco
@@ -29,21 +27,6 @@ export default function Dashboard() {
           <h1 className="text-2xl font-bold font-display tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-400">
             Atmos
           </h1>
-          
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <Menu className="w-6 h-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="p-0 border-r-0 bg-transparent shadow-none w-80">
-              <FavoritesSidebar 
-                currentLocation={location} 
-                onSelect={(loc) => setLocation(loc)}
-                className="h-full border-r border-white/20"
-              />
-            </SheetContent>
-          </Sheet>
         </div>
 
         <div className="flex-1 w-full md:max-w-md">
@@ -51,12 +34,11 @@ export default function Dashboard() {
         </div>
 
         <div className="w-full md:w-auto hidden md:block">
-           {/* Spacer for desktop layout balance */}
            <div className="w-24"></div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8 flex-grow">
+      <main className="max-w-7xl mx-auto w-full flex-grow">
         {/* Main Content Area */}
         <div className="space-y-8 min-w-0">
           {isLoading ? (
@@ -83,28 +65,12 @@ export default function Dashboard() {
             <>
               <CurrentWeather weather={weather} locationName={location.name} />
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="md:col-span-2">
-                  <HourlyForecast weather={weather} />
-                </div>
+              <div className="space-y-8">
+                <HourlyForecast weather={weather} />
+                <DailyForecast weather={weather} />
               </div>
             </>
           ) : null}
-        </div>
-
-        {/* Sidebar Desktop */}
-        <div className="hidden lg:block space-y-8">
-          {weather && <DailyForecast weather={weather} />}
-          <FavoritesSidebar 
-            currentLocation={location}
-            onSelect={setLocation}
-            className="h-[500px]"
-          />
-        </div>
-
-        {/* Mobile Daily Forecast (shows below main content on mobile) */}
-        <div className="lg:hidden">
-          {weather && <DailyForecast weather={weather} />}
         </div>
       </main>
 
